@@ -1,0 +1,1163 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shopping Cart</title>
+
+  <!-- navbar imports starts-->
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<!-- navbar imports end-->
+
+<style>
+  html{
+    scroll-behavior: smooth;
+  }
+  body {
+    /* font-family: Arial, sans-serif; */
+    /* display: flex;
+    justify-content: center;
+    align-items: flex-start; */
+    /* padding: 20px;
+    margin: 0; */
+    background-color: #f4f4f9;
+  }
+
+  /* NAVBAR CSS START */
+/*  @import url('https://fonts.googleapis.com/css2?family=Matemasie&display=swap'); 
+.logo-name{
+  font-family: "Matemasie", sans-serif;
+  font-weight: 400;
+  font-style:normal;
+  
+}*/
+.select {
+width: 100%;
+margin-top:15px;
+cursor: pointer;
+position: relative;
+transition: 300ms;
+color: white;
+/* overflow: hidden; */
+}
+
+.selected {
+background-color: #2a2f3b;
+padding: 5px;
+margin-bottom: 3px;
+border-radius: 5px;
+position: relative;
+z-index: 100000;
+font-size: 15px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+
+}
+
+.arrow {
+position: relative;
+right: 0px;
+height: 10px;
+transform: rotate(-90deg);
+width: 25px;
+fill: white;
+z-index: 100000;
+transition: 300ms;
+}
+
+.options {
+display: flex;
+flex-direction: column;
+border-radius: 5px;
+padding: 5px;
+background-color: #2a2f3b;
+position: relative;
+top: -100px;
+opacity: 0;
+transition: 300ms;
+}
+
+.select:hover > .options {
+opacity: 1;
+top: 0;
+}
+
+.select:hover > .selected .arrow {
+transform: rotate(0deg);
+}
+
+.option {
+border-radius: 5px;
+padding: 5px;
+transition: 300ms;
+background-color: #2a2f3b;
+width: 150px;
+font-size: 15px;
+z-index: 10000;
+}
+.option:hover {
+background-color: #323741;
+}
+
+.options input[type="radio"] {
+display: none;
+}
+
+.options label {
+display: inline-block;
+}
+.options label::before {
+content: attr(data-txt);
+}
+
+.options input[type="radio"]:checked + label {
+display: none;
+}
+
+.options input[type="radio"]#all:checked + label {
+display: none;
+}
+
+.select:has(.options input[type="radio"]#all:checked) .selected::before {
+content: attr(data-default);
+}
+/* .select:has(.options input[type="radio"]#option-1:checked) .selected::before {
+content: attr(data-one);
+}
+.select:has(.options input[type="radio"]#option-2:checked) .selected::before {
+content: attr(data-two);
+}
+.select:has(.options input[type="radio"]#option-3:checked) .selected::before {
+content: attr(data-three);
+} */
+
+  /* NAVBAR CSS END */
+
+
+    /* MENU NAVBAR STARTS */
+    *{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+/* body{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #c1f7f5;
+} */
+.nav-links{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background: black;
+  padding: 10px 8px;
+  border-radius: 12px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  justify-content:space-evenly;
+  margin-top: 1%;
+  /* border:2px solid #d9534f; */
+}
+
+.nav-links li{
+  list-style: none;
+  margin: 0 12px;
+}
+.nav-links li a{
+  position: relative;
+  /* color: #333; */
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 6px 0;
+  text-decoration: none;
+}
+.nav-links li a:before{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  /* background: #34efdf; */
+  background: #efc005;
+  border-radius: 12px;
+  transition: all 0.4s ease;
+}
+.nav-links li a:hover:before{
+  width: 100%;
+}
+
+    /* MENU NAVBAR ENDS */
+
+  .product-container-main{
+    width: 70%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0%;
+    margin: 1%;
+    margin-top: 10%;
+    position:absolute;
+    top: 0px;
+    left: 30px;
+    padding-right: 0;
+    /* border: 2px solid rebeccapurple; */
+  }
+
+  .product-container{
+    width: 90%;
+    margin: 0 10px;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8%;
+    /* border: 2px solid black; */
+  }
+  .cart-container {
+    position: fixed;
+    right: 0px;
+    top: 150px;
+    width: 30%;
+    margin: 0 10px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* border:2px solid  #d9534f; */
+  }
+
+  .product {
+    width: 250px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-evenly; */
+    flex: 1 1 150px;
+    margin-bottom: 50px;
+    /* border: 2px solid yellowgreen; */
+    gap: 2%;
+  }
+
+  .product img {
+    width: 90%;
+  height: 50%;
+  /* margin: 1%; */
+  border-radius: 3%;
+border: .5rem solid white;
+box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+
+
+    /* width: 150px;
+    height: 100px;
+    /* object-fit: contain; */
+    /* border-radius: 5px;
+    margin-right: 15px; */ 
+  }
+
+  .product-details {
+    flex: 1;
+  }
+
+  .product-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+    color: #333;
+    padding-left: 1%;
+  }
+
+  .product-price {
+    color: #666;
+    font-size: 15px;
+    padding-top: 1%;
+    padding-left: 1%;
+
+  }
+
+  .quantity-controls {
+    display: none;
+    align-items: center;
+    margin-right: 10px;
+  }
+
+  .quantity-controls button {
+    background-color: #ffcc00;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .quantity-display {
+    margin: 0 8px;
+    font-size: 14px;
+    width: 20px;
+    text-align: center;
+  }
+
+  .add-to-cart-btn {
+    background-color: #ffcc00;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  /* Cart styling */
+
+  ::-webkit-scrollbar {
+      width: 10px; /* Width of the vertical scrollbar */
+      height: 12px; /* Height of the horizontal scrollbar */
+      /* transition: all 0.3s ease; */
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Light gray background */
+  border-radius: 10px; /* Rounded corners */
+}
+::-webkit-scrollbar-thumb {
+  background: #ffcc00; /* Gray color for the thumb */
+  border-radius: 10px; /* Rounded corners */
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #efc005; /* Darker gray when hovering */
+}
+
+
+  #cartItems{
+    max-height: 200px;
+    overflow: auto;
+    /* border: 2px solid goldenrod; */
+  }
+  .cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+    
+  }
+
+  .cart-header a {
+    color: #d9534f;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .cart-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px 10px 0px;
+    border-bottom: 1px solid #eee;
+    
+  }
+
+  .cart-item:last-child {
+    border-bottom: none;
+  }
+
+  .cart-item img {
+   width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+
+  .cart-item-details {
+    flex: 1;
+  }
+
+  .cart-item-title {
+    font-size: 14px;
+    margin: 0;
+    color: #333;
+  }
+
+  .cart-item-price {
+    font-size: 12px;
+    color: #666;
+  }
+
+  .cart-item-quantity {
+    display: flex;
+    align-items: center;
+  }
+
+  .cart-item-quantity button {
+    background-color: #ffcc00;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .quantity-display {
+    margin: 0 8px;
+  }
+
+  .cart-total {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    margin-top: 15px;
+    font-size: 16px;
+    color: #333;
+  }
+
+  .checkout-btn {
+    display: inline-block;
+    width: 100%;
+    background-color: #ffcc00;
+    color: #333;
+    font-weight: bold;
+    padding: 5px;
+    margin-top: 20px;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+  }
+
+  .menu-title{
+  font-size:35px;
+   text-align: center; 
+    padding: 5% 0 2% 0;
+   /* border: 2px solid brown; */
+   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+  .spanstyle{
+  color:crimson;
+  margin-top: 500px;
+  }
+  .navclass{
+    width: 100%;
+    display: block;
+    /* border: 6px solid red; */
+    position:fixed;
+    z-index: 10000;
+  }
+  
+</style>
+</head>
+<body>
+  
+    <div class="navclass">
+
+  <!-- navbar starts -->
+  <header class="p-1  text-white bg-black dark:bg-black-100 dark:text-gray-800 bg-black-300 relative z-1">
+    <div class="container flex justify-between h-16 mx-auto">
+      <a rel="noopener noreferrer" href="mainpg.html" aria-label="Back to homepage" class="flex items-center p-2">
+        <span class="logo-name">Burger</span>
+      </a>
+    <ul class="items-stretch hidden space-x-3 md:flex">
+    <li class="flex"><a rel="noopener noreferrer" href="store.html" class="flex items-center px-4 ">Store</a></li>
+    <li class="flex"><a rel="noopener noreferrer" href="cart.html" class="flex items-center px-4">Menu</a></li>
+    <li class="flex"><a rel="noopener noreferrer" href="contactjsp.jsp" class="flex items-center px-4">Contact us</a></li>
+    <li class="flex justify-center">
+      <div class="select">
+        <div class="selected" data-default="More" data-one="Login" data-two="Contact us" data-three="About us">
+        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" class="arrow">
+         <path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path>
+        </svg>
+        </div>
+
+    <div class="options">
+      <div title="all">
+        <input id="all" name="option" type="radio" checked="" />
+        <label class="option" for="all" data-txt="All"></label>
+      </div>
+      <a href="login.jsp">
+        <div>
+        <!-- <input id="option-1" name="option" type="radio" /> -->
+        <label class="option">Login/Signup</label>
+      </div></a>
+      <a href="aboutus.html">
+        <div>
+        <!-- <input id="option-2" name="option" type="radio" /> -->
+        <label class="option">About us</label>
+      </div></a>
+      <a href="feedback.jsp"><div>
+        <!-- <input id="option-3" name="option" type="radio" /> -->
+        <label class="option">Feedback</label>
+      </div></a>
+    </div>
+</div>
+</li>
+
+<li class="flex">
+  <a  href="cart.html" class="flex items-center w-8 h-15 ml-5 fg-red"><i class="fas fa-shopping-cart" style="font-size:20px"></i>
+  <!-- <span class="material-symbols-outlined">shopping_cart</span> -->
+  </a>
+</li>
+
+<li class="flex">
+  <a  href="user-profile.jsp" class="flex items-center h-15"><i class="fa fa-user" style="font-size:20px"></i>
+  <!-- <span class="material-symbols-outlined">shopping_cart</span> -->
+  </a>
+</li>
+</ul>
+<!-- <button class="flex justify-end p-4 md:hidden">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+  </svg>
+</button> -->
+</div>
+</header>
+<!-- navbar ends -->
+
+
+  <ul class="nav-links">
+    <li><a href="#burgers"><span style='font-size:18px;'>&#127828;</span>Burger</a></li>
+    <li><a href="#fries"><span style='font-size:18px;'>&#127839;</span>Fries</a></li>
+    <li><a href="#beverage"><span style='font-size:18px;'>&#127865;</span>Beverages</a></li>
+    <li ><a href="#meals"><span style='font-size:18px;'>&#127828;&#127865;</span>Meals</a></li>
+  </ul>
+
+</div>
+
+<div class="product-cart">
+
+<div class="product-container-main">
+
+<section id="burgers">
+<h3 class="menu-title"><span class="spanstyle">PRIME</span> BURGERS</h3>  
+<div class="product-container">
+
+  <!-- Classic Veg -->
+  <div class="product">
+    <img src="images/classicveg.jpg" alt="Classic Veg">
+    <div class="product-details">
+      <p class="product-title">Classic Veg</p>
+      <p class="product-price">₹50</p>
+    </div>
+    <div class="quantity-controls" id="ClassicVeg-controls">
+      <button onclick="decreaseProductQuantity('ClassicVeg')">-</button>
+      <span id="ClassicVeg-qty" class="quantity-display">1</span>
+      <button onclick="increaseProductQuantity('ClassicVeg')">+</button>
+    </div>
+    <button id="ClassicVeg-add" class="add-to-cart-btn" onclick="addToCart('Classic Veg', 50, 'Images/classicveg.jpg', 'ClassicVeg')">Add to Cart</button>
+  </div>
+
+  <!-- Aloo Tikki Burger -->
+  <div class="product">
+    <img src="images/alootikki.jpg" alt="Aloo Tikki Burger">
+    <div class="product-details">
+      <p class="product-title">Aloo Tikki Burger</p>
+      <p class="product-price">₹80</p>
+    </div>
+    <div class="quantity-controls" id="AlooTikki-controls">
+      <button onclick="decreaseProductQuantity('AlooTikki')">-</button>
+      <span id="AlooTikki-qty" class="quantity-display">1</span>
+      <button onclick="increaseProductQuantity('AlooTikki')">+</button>
+    </div>
+    <button id="AlooTikki-add" class="add-to-cart-btn" onclick="addToCart('Aloo Tikki Burger', 80, 'alootikki.jpg', 'AlooTikki')">Add to Cart</button>
+  </div>
+
+  <!-- Cheese Burger -->
+  <div class="product">
+    <img src="images/cheeseburger.jpg" alt="Cheese Burger">
+    <div class="product-details">
+      <p class="product-title">Cheese Burger</p>
+      <p class="product-price">₹120</p>
+    </div>
+    <div class="quantity-controls" id="CheeseBurger-controls">
+      <button onclick="decreaseProductQuantity('CheeseBurger')">-</button>
+      <span id="CheeseBurger-qty" class="quantity-display">1</span>
+      <button onclick="increaseProductQuantity('CheeseBurger')">+</button>
+    </div>
+    <button id="CheeseBurger-add" class="add-to-cart-btn" onclick="addToCart('Cheese Burger', 120, 'cheeseburger.jpg', 'CheeseBurger')">Add to Cart</button>
+  </div>
+
+  <!-- Veg Maharaja -->
+  <div class="product">
+    <img src="images/vegmaharaja.jpg" alt="Veg Maharaja">
+    <div class="product-details">
+      <p class="product-title">Veg Maharaja</p>
+      <p class="product-price">₹180</p>
+    </div>
+    <div class="quantity-controls" id="VegMaharaja-controls">
+      <button onclick="decreaseProductQuantity('VegMaharaja')">-</button>
+      <span id="VegMaharaja-qty" class="quantity-display">1</span>
+      <button onclick="increaseProductQuantity('VegMaharaja')">+</button>
+    </div>
+    <button id="VegMaharaja-add" class="add-to-cart-btn" onclick="addToCart('Veg Maharaja', 180, 'vegmaharaja.jpg', 'VegMaharaja')">Add to Cart</button>
+  </div>
+
+    <!-- Veggie Crunch -->
+  <div class="product">
+    <img src="images/veggiecrunch.jpeg" alt="Veggie Crunch">
+    <div class="product-details">
+      <p class="product-title">Veggie Crunch</p>
+      <p class="product-price">₹150</p>
+    </div>
+    <div class="quantity-controls" id="VeggieCrunch-controls">
+      <button onclick="decreaseProductQuantity('VeggieCrunch')">-</button>
+      <span id="VeggieCrunch-qty" class="quantity-display">1</span>
+      <button onclick="increaseProductQuantity('VeggieCrunch')">+</button>
+    </div>
+    <button id="VeggieCrunch-add" class="add-to-cart-btn" onclick="addToCart('Veggie Crunch', 150, 'veggiecrunch.jpeg', 'VeggieCrunch')">Add to Cart</button>
+  </div>
+
+    <!-- Mushroom Melt -->
+      <div class="product">
+        <img src="images/mushroommelt.jpeg" alt="Mushroom Melt">
+        <div class="product-details">
+          <p class="product-title">Mushroom Melt</p>
+          <p class="product-price">₹230</p>
+        </div>
+        <div class="quantity-controls" id="MushroomMelt-controls">
+          <button onclick="decreaseProductQuantity('MushroomMelt')">-</button>
+          <span id="MushroomMelt-qty" class="quantity-display">1</span>
+          <button onclick="increaseProductQuantity('MushroomMelt')">+</button>
+        </div>
+        <button id="MushroomMelt-add" class="add-to-cart-btn" onclick="addToCart('Mushroom Melt', 230, 'mushroommelt.jpeg', 'MushroomMelt')">Add to Cart</button>
+      </div>
+
+  <!-- Spicy Bean -->
+  <div class="product">
+    <img src="images/spicybean.jpeg" alt="Veggie Crunch">
+    <div class="product-details">
+      <p class="product-title">Spicy Bean</p>
+      <p class="product-price">₹250</p>
+    </div>
+    <div class="quantity-controls" id="SpicyBean-controls">
+      <button onclick="decreaseProductQuantity('SpicyBean')">-</button>
+      <span id="SpicyBean-qty" class="quantity-display">1</span>
+      <button onclick="increaseProductQuantity('SpicyBean')">+</button>
+    </div>
+    <button id="SpicyBean-add" class="add-to-cart-btn" onclick="addToCart('Spicy Bean', 250, 'spicybean.jpeg', 'SpicyBean')">Add to Cart</button>
+  </div>
+
+  <!-- Garden Fresh -->
+  <div class="product">
+    <img src="images/gardenfresh.jpg" alt="Garden Fresh">
+    <div class="product-details">
+      <p class="product-title">Garden Fresh</p>
+      <p class="product-price">₹160</p>
+    </div>
+    <div class="quantity-controls" id="GardenFresh-controls">
+      <button onclick="decreaseProductQuantity('GardenFresh')">-</button>
+      <span id="GardenFresh-qty" class="quantity-display">1</span>
+      <button onclick="increaseProductQuantity('GardenFresh')">+</button>
+    </div>
+    <button id="GardenFresh-add" class="add-to-cart-btn" onclick="addToCart('Garden Fresh', 160, 'gardenfresh.jpg', 'GardenFresh')">Add to Cart</button>
+  </div>
+
+  <!-- Corn & Cheese -->
+  <div class="product">
+    <img src="images/corncheese.jpg" alt="Corn & Cheese">
+    <div class="product-details">
+      <p class="product-title">Corn & Cheese</p>
+      <p class="product-price">₹300</p>
+    </div>
+    <div class="quantity-controls" id="Corn&Cheese-controls">
+      <button onclick="decreaseProductQuantity('Corn&Cheese')">-</button>
+      <span id="Corn&Cheese-qty" class="quantity-display">1</span>
+      <button onclick="increaseProductQuantity('Corn&Cheese')">+</button>
+    </div>
+    <button id="Corn&Cheese-add" class="add-to-cart-btn" onclick="addToCart('Corn & Cheese', 300, 'corncheese.jpg', 'Corn&Cheese')">Add to Cart</button>
+  </div>
+  
+
+
+
+</div>
+</section>
+
+
+<section id="fries">
+<h3 class="menu-title"><span class="spanstyle">ULTIMATE</span> FRIES</h3>  
+<div class="product-container">
+  <!-- Mayo Fries -->
+  <div class="product">
+    <img src="images/mayofries.jpg" alt="Mayo Fries">
+    <div class="product-details">
+      <p class="product-title">Mayo Fries</p>
+      <p class="product-price">₹90</p>
+    </div>
+    <div class="quantity-controls" id="MayoFries-controls">
+      <button onclick="decreaseProductQuantity('MayoFries')">-</button>
+      <span id="MayoFries-qty" class="quantity-display">1</span>
+      <button onclick="increaseProductQuantity('MayoFries')">+</button>
+    </div>
+    <button id="MayoFries-add" class="add-to-cart-btn" onclick="addToCart('Mayo Fries', 90, 'mayofries.jpg', 'MayoFries')">Add to Cart</button>
+  </div>
+
+  <!-- Cheese Fries -->
+  <div class="product">
+    <img src="images/cheesefries.jpg" alt="Cheese Fries">
+    <div class="product-details">
+      <p class="product-title">Cheese Fries</p>
+      <p class="product-price">₹110</p>
+    </div>
+    <div class="quantity-controls" id="CheeseFries-controls">
+      <button onclick="decreaseProductQuantity('CheeseFries')">-</button>
+      <span id="CheeseFries-qty" class="quantity-display">1</span>
+      <button onclick="increaseProductQuantity('CheeseFries')">+</button>
+    </div>
+    <button id="CheeseFries-add" class="add-to-cart-btn" onclick="addToCart('Cheese Fries', 110, 'cheesefries.jpg', 'CheeseFries')">Add to Cart</button>
+  </div>
+
+  <!-- Peri Peri Fries -->
+  <div class="product">
+    <img src="images/perifries.jpg" alt="Peri Peri Fries">
+    <div class="product-details">
+      <p class="product-title">Peri Peri Fries</p>
+      <p class="product-price">₹120</p>
+    </div>
+    <div class="quantity-controls" id="PeriPeriFries-controls">
+      <button onclick="decreaseProductQuantity('PeriPeriFries')">-</button>
+      <span id="PeriPeriFries-qty" class="quantity-display">1</span>
+      <button onclick="increaseProductQuantity('PeriPeriFries')">+</button>
+    </div>
+    <button id="PeriPeriFries-add" class="add-to-cart-btn" onclick="addToCart('Peri Peri Fries', 120, 'perifries.jpg', 'PeriPeriFries')">Add to Cart</button>
+  </div>
+
+    <!-- Tandoori Fries -->
+  <div class="product">
+    <img src="images/tandoorifries.jpg" alt="Tandoori Fries">
+    <div class="product-details">
+      <p class="product-title">Tandoori Fries</p>
+      <p class="product-price">₹150</p>
+    </div>
+    <div class="quantity-controls" id="TandooriFries-controls">
+      <button onclick="decreaseProductQuantity('TandooriFries')">-</button>
+      <span id="TandooriFries-qty" class="quantity-display">1</span>
+      <button onclick="increaseProductQuantity('TandooriFries')">+</button>
+    </div>
+    <button id="TandooriFries-add" class="add-to-cart-btn" onclick="addToCart('Tandoori Fries', 150, 'tandoorifries.jpg', 'TandooriFries')">Add to Cart</button>
+  </div>
+
+    <!-- Chili Cheese Fries -->
+      <div class="product">
+        <img src="images/chilicheesefries.jpeg" alt="Chili Cheese Fries">
+        <div class="product-details">
+          <p class="product-title">Chili Cheese Fries</p>
+          <p class="product-price">₹160</p>
+        </div>
+        <div class="quantity-controls" id="ChiliCheeseFries-controls">
+          <button onclick="decreaseProductQuantity('ChiliCheeseFries')">-</button>
+          <span id="ChiliCheeseFries-qty" class="quantity-display">1</span>
+          <button onclick="increaseProductQuantity('ChiliCheeseFries')">+</button>
+        </div>
+        <button id="ChiliCheeseFries-add" class="add-to-cart-btn" onclick="addToCart('Chili Cheese Fries', 160, 'chilicheesefries.jpeg', 'ChiliCheeseFries')">Add to Cart</button>
+      </div>
+
+  <!-- Garlic Parmesan Fries -->
+  <div class="product">
+    <img src="images/garlicfries.jpg" alt="Garlic Parmesan Fries">
+    <div class="product-details">
+      <p class="product-title">Garlic Parmesan Fries</p>
+      <p class="product-price">₹220</p>
+    </div>
+    <div class="quantity-controls" id="GarlicParmesanFries-controls">
+      <button onclick="decreaseProductQuantity('GarlicParmesanFries')">-</button>
+      <span id="GarlicParmesanFries-qty" class="quantity-display">1</span>
+      <button onclick="increaseProductQuantity('GarlicParmesanFries')">+</button>
+    </div>
+    <button id="GarlicParmesanFries-add" class="add-to-cart-btn" onclick="addToCart('Garlic Parmesan Fries', 220, 'garlicfries.jpg', 'GarlicParmesanFries')">Add to Cart</button>
+  </div>
+  
+</div>
+</section>
+
+<section id="beverage">
+<h3 class="menu-title"><span class="spanstyle">ELITE</span> BEVERAGES</h3>  
+<div class="product-container">
+  <!-- Coke -->
+  <div class="product">
+    <img src="images/coke.jpg" alt="Coke">
+    <div class="product-details">
+      <p class="product-title">Coke</p>
+      <p class="product-price">₹79</p>
+    </div>
+    <div class="quantity-controls" id="Coke-controls">
+      <button onclick="decreaseProductQuantity('Coke')">-</button>
+      <span id="Coke-qty" class="quantity-display">1</span>
+      <button onclick="increaseProductQuantity('Coke')">+</button>
+    </div>
+    <button id="Coke-add" class="add-to-cart-btn" onclick="addToCart('Coke', 79, 'coke.jpg', 'Coke')">Add to Cart</button>
+  </div>
+
+  <!-- Mixed Fruit Beverage -->
+  <div class="product">
+    <img src="images/mixedfruit.jpg" alt="Mixed Fruit Beverage">
+    <div class="product-details">
+      <p class="product-title">Mixed Fruit Beverage</p>
+      <p class="product-price">₹79</p>
+    </div>
+    <div class="quantity-controls" id="MixedFruitBeverage-controls">
+      <button onclick="decreaseProductQuantity('MixedFruitBeverage')">-</button>
+      <span id="MixedFruitBeverage-qty" class="quantity-display">1</span>
+      <button onclick="increaseProductQuantity('MixedFruitBeverage')">+</button>
+    </div>
+    <button id="MixedFruitBeverage-add" class="add-to-cart-btn" onclick="addToCart('Mixed Fruit Beverage', 79, 'mixedfruit.jpg', 'MixedFruitBeverage')">Add to Cart</button>
+  </div>
+
+  <!-- Lime Mojito -->
+  <div class="product">
+    <img src="images/mintmojito.jpg" alt="Lime Mojito">
+    <div class="product-details">
+      <p class="product-title">Lime n Mint Mojito</p>
+      <p class="product-price">₹89</p>
+    </div>
+    <div class="quantity-controls" id="LimeMojito-controls">
+      <button onclick="decreaseProductQuantity('LimeMojito')">-</button>
+      <span id="LimeMojito-qty" class="quantity-display">1</span>
+      <button onclick="increaseProductQuantity('LimeMojito')">+</button>
+    </div>
+    <button id="LimeMojito-add" class="add-to-cart-btn" onclick="addToCart('Lime Mojito', 89, 'mintmojito.jpg', 'LimeMojito')">Add to Cart</button>
+  </div>
+
+    <!-- Blue Mojito -->
+  <div class="product">
+    <img src="images/bluemojito.jpg" alt="Blue Mojito">
+    <div class="product-details">
+      <p class="product-title">Blue Heaven Mojito</p>
+      <p class="product-price">₹89</p>
+    </div>
+    <div class="quantity-controls" id="BlueMojito-controls">
+      <button onclick="decreaseProductQuantity('BlueMojito')">-</button>
+      <span id="BlueMojito-qty" class="quantity-display">1</span>
+      <button onclick="increaseProductQuantity('BlueMojito')">+</button>
+    </div>
+    <button id="BlueMojito-add" class="add-to-cart-btn" onclick="addToCart('Blue Mojito', 89, 'bluemojito.jpg', 'BlueMojito')">Add to Cart</button>
+  </div>
+
+    <!-- Mango Mojito -->
+      <div class="product">
+        <img src="images/mangomojito.jpeg" alt="Mango Mojito">
+        <div class="product-details">
+          <p class="product-title">Sparkling Mango Mojito</p>
+          <p class="product-price">₹89</p>
+        </div>
+        <div class="quantity-controls" id="MangoMojito-controls">
+          <button onclick="decreaseProductQuantity('MangoMojito')">-</button>
+          <span id="MangoMojito-qty" class="quantity-display">1</span>
+          <button onclick="increaseProductQuantity('MangoMojito')">+</button>
+        </div>
+        <button id="MangoMojito-add" class="add-to-cart-btn" onclick="addToCart('Mango Mojito', 89, 'mangomojito.jpeg', 'MangoMojito')">Add to Cart</button>
+      </div>
+
+  <!-- Cold Coffee Shake -->
+  <div class="product">
+    <img src="images/coffeeshake.webp" alt="Cold Coffee Shake">
+    <div class="product-details">
+      <p class="product-title">Cold Coffee Shake</p>
+      <p class="product-price">₹120</p>
+    </div>
+    <div class="quantity-controls" id="ColdCoffeeShake-controls">
+      <button onclick="decreaseProductQuantity('ColdCoffeeShake')">-</button>
+      <span id="ColdCoffeeShake-qty" class="quantity-display">1</span>
+      <button onclick="increaseProductQuantity('ColdCoffeeShake')">+</button>
+    </div>
+    <button id="ColdCoffeeShake-add" class="add-to-cart-btn" onclick="addToCart('Cold Coffee Shake',120, 'coffeeshake.webp', 'ColdCoffeeShake')">Add to Cart</button>
+  </div>
+
+  <!-- Classic Oreo Shake -->
+  <div class="product">
+    <img src="images/oreoshake.jpg" alt="Classic Oreo Shake">
+    <div class="product-details">
+      <p class="product-title">Classic Oreo Shake</p>
+      <p class="product-price">₹140</p>
+    </div>
+    <div class="quantity-controls" id="ClassicOreoShake-controls">
+      <button onclick="decreaseProductQuantity('ClassicOreoShake')">-</button>
+      <span id="ClassicOreoShake-qty" class="quantity-display">1</span>
+      <button onclick="increaseProductQuantity('ClassicOreoShake')">+</button>
+    </div>
+    <button id="ClassicOreoShake-add" class="add-to-cart-btn" onclick="addToCart('Classic Oreo Shake', 10, 'oreoshake.jpg', 'ClassicOreoShake')">Add to Cart</button>
+  </div>
+
+  <!-- Belgian Chocolate Shake -->
+  <div class="product">
+    <img src="images/chocolateshake.jpg" alt="Belgian Chocolate Shake">
+    <div class="product-details">
+      <p class="product-title">Belgian Chocolate Shake</p>
+      <p class="product-price">₹160</p>
+    </div>
+    <div class="quantity-controls" id="BelgianChocolateShake-controls">
+      <button onclick="decreaseProductQuantity('BelgianChocolateShake')">-</button>
+      <span id="BelgianChocolateShake-qty" class="quantity-display">1</span>
+      <button onclick="increaseProductQuantity('BelgianChocolateShake')">+</button>
+    </div>
+    <button id="BelgianChocolateShake-add" class="add-to-cart-btn" onclick="addToCart('Belgian Chocolate Shake', 160, 'chocolateshake.jpg', 'BelgianChocolateShake')">Add to Cart</button>
+  </div>
+
+  <!-- Strawberyy Shake -->
+  <div class="product">
+    <img src="images/strawberryshake.jpg" alt="Strawberyy Shake">
+    <div class="product-details">
+      <p class="product-title">Strawberyy Shake</p>
+      <p class="product-price">₹160</p>
+    </div>
+    <div class="quantity-controls" id="StrawberyyShake-controls">
+      <button onclick="decreaseProductQuantity('StrawberyyShake')">-</button>
+      <span id="StrawberyyShake-qty" class="quantity-display">1</span>
+      <button onclick="increaseProductQuantity('StrawberyyShake')">+</button>
+    </div>
+    <button id="StrawberyyShake-add" class="add-to-cart-btn" onclick="addToCart('Strawberyy Shake', 160, 'strawberryshake.jpg', 'StrawberyyShake')">Add to Cart</button>
+  </div>
+  
+
+
+
+</div>
+</section>
+
+<section id="meals">
+<h3 class="menu-title"><span class="spanstyle">EXECUTIVE</span> MEALS</h3>  
+<div class="product-container">
+
+  <!-- Veg Maharaja + Tandoori Fries + Cold Coffee Shake -->
+  <div class="product">
+    <img src="images/meal1.png" alt="meal1">
+    <div class="product-details">
+      <p class="product-title">Veg Maharaja Burger+ Tandoori Fries + Cold Coffee Shake</p>
+      <p class="product-price">₹249</p>
+    </div>
+    <div class="quantity-controls" id="meal1-controls">
+      <button onclick="decreaseProductQuantity('meal1')">-</button>
+      <span id="meal1-qty" class="quantity-display">1</span>
+      <button onclick="increaseProductQuantity('meal1')">+</button>
+    </div>
+    <button id="meal1-add" class="add-to-cart-btn" onclick="addToCart('Veg Maharaja Burger+ Tandoori Fries + Cold Coffee Shake', 249, 'meal1.png', 'meal1')">Add to Cart</button>
+  </div>
+
+  <!-- Mushroom Melt + Garlic Parmesan Fries + Sparkling Mango Mojito -->
+  <div class="product">
+    <img src="images/meal2.png" alt="meal2">
+    <div class="product-details">
+      <p class="product-title">Mushroom Melt Burger + Garlic Fries + Mango Mojito </p>
+      <p class="product-price">₹279</p>
+    </div>
+    <div class="quantity-controls" id="meal2-controls">
+      <button onclick="decreaseProductQuantity('meal2')">-</button>
+      <span id="meal2-qty" class="quantity-display">1</span>
+      <button onclick="increaseProductQuantity('meal2')">+</button>
+    </div>
+    <button id="meal2-add" class="add-to-cart-btn" onclick="addToCart('Mushroom Melt Burger + Garlic Fries + Mango Mojito', 279, 'meal2.png', 'meal2')">Add to Cart</button>
+  </div>
+
+  <!--Aloo Tikki Burger + Cheese Fries + Lime n Mint Mojito -->
+  <div class="product">
+    <img src="images/meal3.png" alt="meal3">
+    <div class="product-details">
+      <p class="product-title">Aloo Tikki Burger + Cheese Fries + Lime n Mint Mojito</p>
+      <p class="product-price">₹249</p>
+    </div>
+    <div class="quantity-controls" id="meal3-controls">
+      <button onclick="decreaseProductQuantity('meal3')">-</button>
+      <span id="meal3-qty" class="quantity-display">1</span>
+      <button onclick="increaseProductQuantity('meal3')">+</button>
+    </div>
+    <button id="meal3-add" class="add-to-cart-btn" onclick="addToCart('Aloo Tikki Burger + Cheese Fries + Lime n Mint Mojito', 249, 'images/meal3.png', 'meal3')">Add to Cart</button>
+  </div>
+
+    <!--Spicy Bean Burger + Peri Peri Fries + Blue Heaven Mojito -->
+  <div class="product">
+    <img src="images/meal4.png" alt="meal4">
+    <div class="product-details">
+      <p class="product-title">Spicy Bean Burger + Peri Peri Fries + Blue Heaven Mojito </p>
+      <p class="product-price">₹329</p>
+    </div>
+    <div class="quantity-controls" id="meal4-controls">
+      <button onclick="decreaseProductQuantity('meal4')">-</button>
+      <span id="meal4-qty" class="quantity-display">1</span>
+      <button onclick="increaseProductQuantity('meal4')">+</button>
+    </div>
+    <button id="meal4-add" class="add-to-cart-btn" onclick="addToCart('Spicy Bean Burger + Peri Peri Fries + Blue Heaven Mojito', 329, 'meal4.png', 'meal4')">Add to Cart</button>
+  </div>
+
+    <!-- Corn & Cheese Burger + Chilli Cheese Fries + Classic Oreo Shake -->
+      <div class="product">
+        <img src="images/meal5.png" alt="meal5">
+        <div class="product-details">
+          <p class="product-title">Corn & Cheese Burger + Chilli Cheese Fries + Classic Oreo Shake</p>
+          <p class="product-price">₹349</p>
+        </div>
+        <div class="quantity-controls" id="meal5-controls">
+          <button onclick="decreaseProductQuantity('meal5')">-</button>
+          <span id="meal5-qty" class="quantity-display">1</span>
+          <button onclick="increaseProductQuantity('meal5')">+</button>
+        </div>
+        <button id="meal5-add" class="add-to-cart-btn" onclick="addToCart('Corn & Cheese Burger + Chilli Cheese Fries + Classic Oreo Shake', 349, 'meal5.png', 'meal5')">Add to Cart</button>
+      </div>
+
+  <!-- Cheese Burger + Mayo Fries + Mixed Fruit Beverages -->
+  <div class="product">
+    <img src="images/meal6.png" alt="meal6">
+    <div class="product-details">
+      <p class="product-title">Cheese Burger + Mayo Fries + Mixed Fruit Beverage(MEAL6)</p>
+      <p class="product-price">₹399</p>
+    </div>
+    <div class="quantity-controls" id="meal6-controls">
+      <button onclick="decreaseProductQuantity('meal6')">-</button>
+      <span id="meal6-qty" class="quantity-display">1</span>
+      <button onclick="increaseProductQuantity('meal6')">+</button>
+    </div>
+    <button id="meal6-add" class="add-to-cart-btn" onclick="addToCart('Cheese Burger + Mayo Fries + Mixed Fruit Beverage(MEAL6)', 399, 'meal6.png', 'meal6')">Add to Cart</button>
+  </div>
+  
+</div>
+</section>
+
+</div>
+
+<div class="cart-container">
+  <div class="cart-header">
+    <span>Your Cart</span>
+    <a href="#" onclick="clearCart()">Clear All</a>
+  </div>
+  <div id="cartItems"></div>
+
+  <div class="cart-total">
+    <span>Sub Total</span>
+    <span id="cartTotal">₹0</span>
+  </div>
+
+  <a href="checkout.html" class="checkout-btn" id="btn" onclick="check()">Checkout</a>
+  
+</div>   
+
+</div>
+
+<script>
+  let cart = {};
+  // Load cart from local storage if it exists
+  document.addEventListener("DOMContentLoaded", () => {
+    const savedCart = JSON.parse(localStorage.getItem("cart"));
+    if (savedCart) {
+      cart = savedCart;
+      for (let id in cart) {
+        document.getElementById(`${id}-controls`).style.display = 'flex';
+        document.getElementById(`${id}-add`).style.display = 'none';
+        document.getElementById(`${id}-qty`).innerText = cart[id].quantity;
+      }
+      renderCart();
+    }
+  });
+
+//function check(){
+//    if (session.getAttribute("user") == null) {
+//    response.sendRedirect("contactus.html");  // Redirect to login if user is not logged in
+//} else {
+//    response.sendRedirect("index.html"); 
+//    // Proceed to add the item to the cart
+//}
+//}
+
+  function saveCart() {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }
+
+  function increaseProductQuantity(id) {
+    let quantityDisplay = document.getElementById(`${id}-qty`);
+    let quantity = parseInt(quantityDisplay.innerText) + 1;
+    quantityDisplay.innerText = quantity;
+    cart[id].quantity = quantity;
+    saveCart();
+    renderCart();
+  }
+
+  function decreaseProductQuantity(id) {
+    let quantityDisplay = document.getElementById(`${id}-qty`);
+    let quantity = parseInt(quantityDisplay.innerText);
+    if (quantity > 1) {
+      quantity--;
+      quantityDisplay.innerText = quantity;
+      cart[id].quantity = quantity;
+    } else {
+      document.getElementById(`${id}-controls`).style.display = 'none';
+      document.getElementById(`${id}-add`).style.display = 'inline-block';
+      delete cart[id];
+    }
+    saveCart();
+    renderCart();
+  }
+
+  function addToCart(name, price, image, id) {
+    if (!cart[id]) {
+      cart[id] = { name, price, image, quantity: 1 };
+    }
+    document.getElementById(`${id}-add`).style.display = 'none';
+    document.getElementById(`${id}-controls`).style.display = 'flex';
+    saveCart();
+    renderCart();
+  }
+
+  function clearCart() {
+    cart = {};
+    localStorage.removeItem("cart");
+    document.querySelectorAll('.quantity-controls').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('.add-to-cart-btn').forEach(el => el.style.display = 'inline-block');
+    renderCart();
+  }
+
+  function renderCart() {
+    const cartItems = document.getElementById("cartItems");
+    const cartTotal = document.getElementById("cartTotal");
+    cartItems.innerHTML = '';
+    let total = 0;
+    let delivery=50;
+    let grandtotal=0;
+
+    for (let item in cart) {
+      const cartItem = document.createElement("div");
+      cartItem.classList.add("cart-item");
+      cartItem.innerHTML = `
+        <img src="Images/${cart[item].image}" alt="${cart[item].name}">
+        <div class="cart-item-details">
+          <p class="cart-item-title">${cart[item].name}</p>
+          <p class="cart-item-price">₹${cart[item].price}</p>
+        </div>
+        <div class="cart-item-quantity">
+          <button onclick="decreaseProductQuantity('${item}')">-</button>
+          <span class="quantity-display">${cart[item].quantity}</span>
+          <button onclick="increaseProductQuantity('${item}')">+</button>
+        </div>
+      `;
+      
+      cartItems.appendChild(cartItem);
+      total += cart[item].price * cart[item].quantity;
+      
+      }
+    cartTotal.innerText = `₹${total.toFixed(2)}`;
+  }
+</script>
+
+</body>
+</html>
+
