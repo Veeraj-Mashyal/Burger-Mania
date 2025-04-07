@@ -87,7 +87,7 @@
         /* Button Styles */
         .button-container {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 10px;
         }
 
         button {
@@ -104,7 +104,7 @@
         }
 
         button:hover {
-            background-color: #2980b9;
+            background: rgb(34, 34, 34);
         }
     </style>
 </head>
@@ -205,7 +205,9 @@
 
 
 <div class="button-container">
+    <button onclick="location.href='cart.jsp';">Back to Menu</button>
     <button onclick="location.href='payment.jsp';">Proceed to Payment</button>
+    
 </div>
 
     <% } %>

@@ -10,57 +10,71 @@
     <title>Login Check</title>
 </head>
 <body>
-    <%
-        response.setContentType("text/html;charset=UTF-8");
-        // Retrieve username and password from the request
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String userId = "";
+   <%
+    response.setContentType("text/html;charset=UTF-8");
 
-        if (email != null && password != null) {
-            try {
-                // Load the JDBC driver
-                Class.forName("com.mysql.cj.jdbc.Driver");
+    // Retrieve username and password from the request
+    String email = request.getParameter("email");
+    String password = request.getParameter("password");
+    String userId = "";
 
-                // Establish a connection to the database
-                Connection conn = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/burgermania", "root", "Veeraj_1530");
+    if (email != null && password != null && !email.isEmpty() && !password.isEmpty()) {
+        try {
+            // Load the JDBC driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
-                // Create a SQL query to check if the user exists
-                String query = "SELECT id FROM users WHERE email = ? AND password = ?";
-                PreparedStatement pstmt = conn.prepareStatement(query);
-                pstmt.setString(1, email);
-                pstmt.setString(2, password);
+            // Establish a connection to the database
+            Connection conn = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/burgermania", "root", "Veeraj_1530");
 
-                ResultSet rs = pstmt.executeQuery();
+            // Create a SQL query to check if the user exists
+            String query = "SELECT id FROM users WHERE email = ? AND password = ?";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, email);
+            pstmt.setString(2, password);
 
-                if (rs.next()) {
-                    // Login successful
-                    userId = rs.getString("id");
+            ResultSet rs = pstmt.executeQuery();
 
-                    // Store user ID in the session
-                    HttpSession ss = request.getSession(true);
-                    ss.setAttribute("id", userId);
+            if (rs.next()) {
+                // Login successful
+                userId = rs.getString("id");
 
-                    // Redirect to the home page
-                    response.sendRedirect("index.html");
-                } else {
-                    // Login failed, show an error message
-                    out.println("<p style='color:red;'>Invalid email or password.</p>");
-                    request.getRequestDispatcher("login.jsp").include(request, response);
-                }
+                // Store user ID in the session
+                HttpSession ss = request.getSession(true);
+                ss.setAttribute("id", userId);
 
-                // Close the connections
-                rs.close();
-                pstmt.close();
-                conn.close();
-            } catch (Exception e) {
-                out.println("<p style='color:red;'>Error: " + e.getMessage() + "</p>");
+                // Redirect to the home page
+                response.sendRedirect("index.html");
+            } else {
+%>
+                <script>
+                    alert("Invalid email or password. Please try again.");
+                    window.location.href = "login.jsp";
+                </script>
+<%
             }
-        } else {
-            out.println("<p style='color:red;'>Email and Password cannot be null.</p>");
-            request.getRequestDispatcher("login.jsp").include(request, response);
+
+            // Close the connections
+            rs.close();
+            pstmt.close();
+            conn.close();
+        } catch (Exception e) {
+%>
+            <script>
+                alert("Error: <%= e.getMessage() %>");
+                window.location.href = "login.jsp";
+            </script>
+<%
         }
-    %>
+    } else {
+%>
+        <script>
+            alert("Email and Password cannot be empty!");
+            window.location.href = "login.jsp";
+        </script>
+<%
+    }
+%>
+
 </body>
 </html>

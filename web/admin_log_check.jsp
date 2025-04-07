@@ -10,7 +10,7 @@
     <title>Login Check</title>
 </head>
 <body>
-    <%
+   <%
     String dbURL = "jdbc:mysql://localhost:3306/burgermania";
     String dbUser = "root";
     String dbPass = "Veeraj_1530";
@@ -50,17 +50,31 @@
             // Redirect to admin profile page
             response.sendRedirect("admin-profile.jsp");
         } else {
-            // Login failed
-            out.println("<p>Invalid email or password!</p>");
+%>
+            <script>
+                alert("Invalid email or password!");
+                window.location.href = "login.jsp";
+            </script>
+<%
         }
     } catch (Exception e) {
-        e.printStackTrace();
+%>
+        <script>
+            alert("Error: <%= e.getMessage() %>");
+            window.location.href = "login.jsp";
+        </script>
+<%
     } finally {
-        if (rs != null) rs.close();
-        if (pstmt != null) pstmt.close();
-        if (conn != null) conn.close();
+        try {
+            if (rs != null) rs.close();
+            if (pstmt != null) pstmt.close();
+            if (conn != null) conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 %>
+
 
 </body>
 </html>

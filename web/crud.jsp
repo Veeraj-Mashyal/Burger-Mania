@@ -151,6 +151,23 @@ footer {
     font-size: 0.9rem;
     color: #777;
 }
+.btn-container {
+      text-align: center;
+    }
+    .btn-container a {
+      display: inline-block;
+      margin: 5px 5px 0px  5px;
+      padding: 10px 15px;
+      background-color: #2c3e50;
+      color: #fff;
+      text-decoration:none;
+      border-radius: 5px;
+           font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+    }
+    .btn-container a:hover {
+      background-color: rgb(34, 34, 34);
+    }
 
     </style>
 </head>
@@ -172,9 +189,11 @@ footer {
         stmt = conn.createStatement();
 
         // Handle CRUD operations for categories and products
-        String action = request.getParameter("action");
-
-        // CREATE or UPDATE category
+        String action = request.getParameter("action");%>
+        <div class="btn-container">
+      <a href="admin-profile.jsp">Back to Admin Page</a>
+      </div>
+     <%   // CREATE or UPDATE category
         if ("createCategory".equals(action)) {
             String categoryName = request.getParameter("categoryName");
             if (categoryName != null && !categoryName.isEmpty()) {

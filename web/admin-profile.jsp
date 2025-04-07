@@ -138,8 +138,10 @@ function updateOrderStatus(orderId, newStatus) {
     </div>
     <div id="statusMessage" style="text-align: center; font-weight: bold; color: green; margin-bottom: 10px;"></div>
     <div class="btn-container">
+        <a href="index.html">Home</a>
       <a href="crud.jsp">Manage Products</a>
       <a href="previousOrders.jsp">Previous Orders</a>
+      <a href="franchiseRequests.jsp">Franchise Requests</a>
       <a href="salesReport.jsp">Sales Report</a>
       <a href="manage-users.jsp">View Customers</a>
       <a href="viewProducts.jsp">View Products</a>
@@ -153,7 +155,7 @@ function updateOrderStatus(orderId, newStatus) {
       try {
         Class.forName("com.mysql.cj.jdbc.Driver");
         conn = DriverManager.getConnection(dbURL, dbUser, dbPass);
-        String query = "SELECT order_id, uid, order_date, total_amount, order_details, quantity, status FROM orders WHERE status NOT IN ('Delivered', 'Canceled') ORDER BY order_date DESC";
+        String query = "SELECT order_id, uid, order_date, total_amount, order_details, quantity, status, payment_mode FROM orders WHERE status NOT IN ('Delivered', 'Canceled') ORDER BY order_date DESC";
         pstmt = conn.prepareStatement(query);
         rs = pstmt.executeQuery();
 
@@ -174,6 +176,7 @@ function updateOrderStatus(orderId, newStatus) {
                 <th>Quantity</th>
                 <th>Actions</th>
                 <th>Status</th>
+                <th>Payment</th>
               </tr>
             </thead>
             <tbody>
@@ -186,6 +189,7 @@ function updateOrderStatus(orderId, newStatus) {
             String orderDetails = rs.getString("order_details");
             String quantity = rs.getString("quantity");
             String status = rs.getString("status");
+            String payment_mode=rs.getString("payment_mode");
             String updateQuery = "UPDATE orders SET status = 'Canceled' WHERE status = 'Pending' AND TIMESTAMPDIFF(MINUTE, order_date, NOW()) > 120";
         pstmt = conn.prepareStatement(updateQuery);
         int updatedRows = pstmt.executeUpdate();
@@ -217,6 +221,7 @@ function updateOrderStatus(orderId, newStatus) {
 </form>
                 </td>
                 <td><%= status %></td>
+                <td><%= payment_mode %></td>
               </tr>
     <%
           }

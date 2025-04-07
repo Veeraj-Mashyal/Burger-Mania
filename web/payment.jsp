@@ -105,7 +105,7 @@
         }
 
         button:hover {
-            background-color: #2980b9;
+            background: rgb(34, 34, 34);
         }
 
         .note {

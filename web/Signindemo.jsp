@@ -386,7 +386,7 @@ button[type="button"]{
    
         <div class="form-group">
             <label for="fullname" class="labels">Full Name </label>
-            <input type="fullname" id="fullname" name="fullname" required>
+            <input type="text" id="fullname" name="fullname" required>
         </div>
         
         <div class="form-group">

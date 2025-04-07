@@ -16,127 +16,101 @@
 <title>Contact Us</title>
 
 <!-- navbar imports starts-->
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Matemasie&display=swap" rel="stylesheet">
 <!-- navbar imports end-->
 
 <style>
 
 /* NAVBAR STARTS */
-@import url('https://fonts.googleapis.com/css2?family=Matemasie&display=swap'); 
-.logo-name{
-  font-family: "Matemasie", sans-serif;
-  font-weight: 400;
-  font-style:normal;
-  
-}
-.select {
-width: 100%;
-margin-top:15px;
-cursor: pointer;
-position: relative;
-transition: 300ms;
-color: white;
-/* overflow: hidden; */
-}
-
-.selected {
-background-color: #2a2f3b;
-padding: 5px;
-margin-bottom: 3px;
-border-radius: 5px;
-position: relative;
-z-index: 100000;
-font-size: 15px;
-display: flex;
-align-items: center;
-justify-content: space-between;
-
-}
-
-.arrow {
-position: relative;
-right: 0px;
-height: 10px;
-transform: rotate(-90deg);
-width: 25px;
-fill: white;
-z-index: 100000;
-transition: 300ms;
-}
-
-.options {
-display: flex;
-flex-direction: column;
-border-radius: 5px;
-padding: 5px;
-background-color: #2a2f3b;
-position: relative;
-top: -100px;
-opacity: 0;
-transition: 300ms;
-}
-
-.select:hover > .options {
-opacity: 1;
-top: 0;
-}
-
-.select:hover > .selected .arrow {
-transform: rotate(0deg);
-}
-
-.option {
-border-radius: 5px;
-padding: 5px;
-transition: 300ms;
-background-color: #2a2f3b;
-width: 150px;
-font-size: 15px;
-}
-.option:hover {
-background-color: #323741;
-}
-
-.options input[type="radio"] {
-display: none;
-}
-
-.options label {
-display: inline-block;
-}
-.options label::before {
-content: attr(data-txt);
-}
-
-.options input[type="radio"]:checked + label {
-display: none;
-}
-
-.options input[type="radio"]#all:checked + label {
-display: none;
-}
-
-.select:has(.options input[type="radio"]#all:checked) .selected::before {
-content: attr(data-default);
-
-}
-/* .select:has(.options input[type="radio"]#option-1:checked) .selected::before {
-content: attr(data-one);
-border: 2px solid yellow;
-
-}
-.select:has(.options input[type="radio"]#option-2:checked) .selected::before {
-content: attr(data-two);
-}
-.select:has(.options input[type="radio"]#option-3:checked) .selected::before {
-content: attr(data-three);
-} */
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        nav {
+            background: black;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 10px 10px 20px;
+        }
+        .logo {
+            font-size: 15px;
+            font-weight: 400;
+            font-family: "Matemasie", serif;
+            padding: 10px;
+        }
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        .nav-links li {
+            position: relative;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            padding: 10px;
+            display: block;
+        }
+        .nav-links a:hover {
+            background-color: rgb(66, 66, 66);
+            border-radius: 10px;
+        }
  
+        .dropdown {
+            display: none;
+        }
+        .icons {
+            display: flex;
+            gap: 5px;
+            font-size: 20px;
+            padding: 2px;
+        }
+        .icons a{
+            padding: 10px;
+            color: white;
+        }
+        .icons a:hover{
+            background-color: rgb(66, 66, 66);
+            border-radius: 10px; 
+        }
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .highlight{
+            background-color: rgb(66, 66, 66);
+            border-radius: 10px;
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                background: black;
+            }
+            .nav-links.show {
+                display: flex;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .nav-links li {
+                display: block;
+                text-align: center;
+            }
+        }
 /*  NAVBAR ENDS */
 
 .contact-main-container{
@@ -206,6 +180,13 @@ textarea {
     border-radius: 4px;
     font-size: 14px;
 }
+.contact-link a{
+    text-decoration: none;
+    color: black;
+}
+.contact-link a:hover{
+    text-decoration: underline;
+}
 
 textarea {
     resize: vertical;
@@ -244,63 +225,27 @@ textarea {
     
     
  <!-- navbar starts -->
-  <header class="p-1  text-white bg-black dark:bg-black-100 dark:text-gray-800 bg-black-300 relative z-1">
-    <div class="container flex justify-between h-16 mx-auto">
-      <a rel="noopener noreferrer" href="#" aria-label="Back to homepage" class="flex items-center p-2">
-        <span class="logo-name">Burger</span>
-      </a>
-    <ul class="items-stretch hidden space-x-3 md:flex">
-    <li class="flex"><a rel="noopener noreferrer" href="store.html" class="flex items-center px-4 ">Store</a></li>
-    <li class="flex"><a rel="noopener noreferrer" href="cart.html" class="flex items-center px-4">Menu</a></li>
-    <li class="flex"><a rel="noopener noreferrer" href="contactjsp.jsp" class="flex items-center px-4">Contact Us</a></li>
-    <li class="flex justify-center">
-      <div class="select">
-        <div class="selected" data-default="More" data-one="Login" data-two="Contact us" data-three="About us">
-        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" class="arrow">
-         <path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path>
-        </svg>
+   <nav>
+        <div class="logo">Burger</div>
+        <ul class="nav-links">
+            <li><a href="franchise.jsp">Get Franchise</a></li>
+            <li><a href="products.jsp">Menu</a></li>
+            <li class="highlight"><a href="contactjsp.jsp">Contact us</a></li>
+            <li><a href="login.jsp">Login/Signup</a></li>
+            <li><a href="aboutus.html">About us</a></li>
+            <li><a href="feedback.jsp">Feedback</a></li>
+        </ul>
+        <div class="icons">
+            <a href="cart.jsp"><i class="fas fa-shopping-cart"></i></a>
+            <a href="user-profile.jsp"><i class="fas fa-user"></i></a>
+            <span class="menu-toggle">☰</span>
         </div>
-
-    <div class="options">
-      <div title="all">
-        <input id="all" name="option" type="radio" checked="" />
-        <label class="option" for="all" data-txt="All"></label>
-      </div>
-      <a href="login.jsp">
-        <div>
-        <!-- <input id="option-1" name="option" type="radio" /> -->
-        <label class="option">Login/Signup</label>
-      </div></a>
-      <a href="aboutus.html">
-        <div>
-        <!-- <input id="option-2" name="option" type="radio" /> -->
-        <label class="option">About us</label>
-      </div></a>
-      <a href="feedback.jsp"><div>
-        <!-- <input id="option-3" name="option" type="radio" /> -->
-        <label class="option">Feedback</label>
-      </div></a>
-    </div>
-</div>
-</li>
-
-<li class="flex">
-  <a  href="cart.html" class="flex items-center w-8 h-15 ml-5 fg-red"><i class="fas fa-shopping-cart" style="font-size:20px"></i></a>
-</li>
-
-<li class="flex">
-  <a  href="user-profile.jsp" class="flex items-center h-15"><i class="fa fa-user" style="font-size:20px"></i></a>
-</li>
-
-</ul>
-<!-- <button class="flex justify-end p-4 md:hidden">
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-  </svg>
-</button> -->
-
-</div>
-</header>
+    </nav>
+    <script>
+        document.querySelector(".menu-toggle").addEventListener("click", function() {
+            document.querySelector(".nav-links").classList.toggle("show");
+        });
+    </script>
 <!-- navbar ends -->
 
 <!-- Contact Starts -->
@@ -335,6 +280,21 @@ textarea {
 </body>
 </html>
 <% 
+    HttpSession ss = request.getSession(false);
+      if (ss == null || ss.getAttribute("id") == null) {
+        response.sendRedirect("login.jsp");
+        return;
+      }
+
+      int uid = 0;
+      try {
+        String s = (String) ss.getAttribute("id");
+        uid = Integer.parseInt(s);
+      } catch (NumberFormatException e) {
+        response.sendRedirect("login.jsp");
+        return;
+      }
+      
         // Handle form submission
 //        String uid=request.getParameter("uid");
         String firstName = request.getParameter("first-name");

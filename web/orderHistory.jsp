@@ -64,6 +64,7 @@
                 <th>Order Details</th>
                 <th>Quantity</th>
                 <th>Status</th>
+<!--                <th>Status</th>-->
             </tr>
         </thead>
         <tbody>

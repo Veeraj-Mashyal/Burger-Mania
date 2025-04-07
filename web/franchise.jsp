@@ -12,39 +12,36 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Matemasie&display=swap" rel="stylesheet">
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         
         /* Navbar css Starts */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         nav {
             background: black;
             color: white;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 15px;
+            padding: 10px 10px 10px 20px;
         }
         .logo {
-            margin-left: 15px;
-            font-size: 18px;
+            font-size: 15px;
+            font-weight: 400;
             font-family: "Matemasie", serif;
-            /*border: 2px solid red;*/
-        }
-        .logo a{
-            text-decoration: none;
-            color: white;
-            
+            padding: 10px;
         }
         .nav-links {
             list-style: none;
             display: flex;
             gap: 20px;
-            transition: all 0.3s ease;
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         }
         .nav-links li {
             position: relative;
@@ -54,58 +51,37 @@
             color: white;
             padding: 10px;
             display: block;
-            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         }
-        .nav-links a:hover{
+        .nav-links a:hover {
             background-color: rgb(66, 66, 66);
             border-radius: 10px;
         }
-        .dropdown{
-            background-color: rgb(38, 38, 38);
-            border-radius: 10px;
-            padding-right: 100px;
-        }
-        .dropdown-content {
+ 
+        .dropdown {
             display: none;
-            position: absolute;
-            background-color: rgb(38, 38, 38);
-            border-radius: 10px;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-            z-index: 1;
-            opacity: 0;
-            list-style-type:  none;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-        .dropdown:hover .dropdown-content {
-            display: block;
-            opacity: 1;
-            visibility: visible;
-            border-radius: 10px;
-        }
-        .dropdown-content a:hover{
-            background-color: rgb(66, 66, 66);
-            border-radius: 10px;
         }
         .icons {
             display: flex;
-            gap: 10px;
+            gap: 5px;
             font-size: 20px;
+            padding: 2px;
         }
         .icons a{
             padding: 10px;
-            text-decoration: none;
             color: white;
         }
         .icons a:hover{
             background-color: rgb(66, 66, 66);
-            border-radius: 10px;
+            border-radius: 10px; 
         }
         .menu-toggle {
             display: none;
             font-size: 24px;
             cursor: pointer;
+        }
+        .highlight{
+            background-color: rgb(66, 66, 66);
+            border-radius: 10px;
         }
         @media (max-width: 768px) {
             .nav-links {
@@ -116,7 +92,6 @@
                 top: 60px;
                 left: 0;
                 background: black;
-                transition: all 0.3s ease;
             }
             .nav-links.show {
                 display: flex;
@@ -127,12 +102,6 @@
             .nav-links li {
                 display: block;
                 text-align: center;
-            }
-            .dropdown-content {
-                display: block;
-                position: static;
-                background: none;
-                box-shadow: none;
             }
         }
         /* Navbar css ends */
@@ -176,7 +145,7 @@
             width: 100%;
         }
         .btn-submit:hover {
-            background: #0056b3;
+            background: rgb(34, 34, 34);
         }
         .alert {
             font-size: 14px;
@@ -188,20 +157,15 @@
 <body>
     
         <!-- navbody starts -->
-    <nav>
-        <div class="logo"><a href="index.html">Burger</a></div>
+<nav>
+        <div class="logo">Burger</div>
         <ul class="nav-links">
-            <li><a href="franchise.jsp">Get Franchise</a></li>
+            <li class="highlight"><a href="franchise.jsp">Get Franchise</a></li>
             <li><a href="products.jsp">Menu</a></li>
             <li><a href="contactjsp.jsp">Contact us</a></li>
-            <li class="dropdown">
-                <a href="#">More ▾</a>
-                <ul class="dropdown-content">
-                    <li><a href="login.jsp">Login/Signup</a></li>
-                    <li><a href="aboutus.jsp">About us</a></li>
-                    <li><a href="feedback.jsp">Feedback</a></li>
-                </ul>
-            </li>
+            <li><a href="login.jsp">Login/Signup</a></li>
+            <li><a href="aboutus.html">About us</a></li>
+            <li><a href="feedback.jsp">Feedback</a></li>
         </ul>
         <div class="icons">
             <a href="cart.jsp"><i class="fas fa-shopping-cart"></i></a>

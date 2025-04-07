@@ -95,9 +95,15 @@
 </head>
 <body>
   <div class="profile-container">
-    <h1>User Profile</h1>
+    <h1>User Dashboard</h1>
 
     <%
+        
+response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // Prevents caching
+response.setHeader("Pragma", "no-cache"); // HTTP 1.0
+response.setHeader("Expires", "0"); // Ensures page expires immediately
+
+        
       String dbURL = "jdbc:mysql://localhost:3306/burgermania";
       String dbUser = "root";
       String dbPass = "Veeraj_1530";
@@ -119,6 +125,11 @@
         response.sendRedirect("login.jsp");
         return;
       }
+      
+response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
+response.setHeader("Pragma", "no-cache"); // HTTP 1.0
+response.setHeader("Expires", "0"); // Proxies
+
 
       try {
         Class.forName("com.mysql.cj.jdbc.Driver");
@@ -141,6 +152,7 @@
           
           <!-- Additional Links -->
     <div class="additional-links">
+        <a href="index.html">Home</a>
       <a href="updateProfile.jsp">Update Profile</a>
       <a href="orderHistory.jsp">Order History</a>
       <a href="ratingFeedback.jsp">Rating & Feedback</a>
@@ -157,7 +169,7 @@
         pstmt.close();
 
         // Fetch current orders
-        String orderQuery = "SELECT order_id, order_date, order_details, quantity, total_amount, status FROM orders WHERE uid = ? AND status NOT IN ('Delivered', 'Canceled')";
+        String orderQuery = "SELECT order_id, order_date, order_details, quantity, total_amount, status,payment_mode FROM orders WHERE uid = ? AND status NOT IN ('Delivered', 'Canceled')";
         pstmt = conn.prepareStatement(orderQuery);
         pstmt.setInt(1, uid);
         rs = pstmt.executeQuery();
@@ -177,6 +189,7 @@
           <th>Quantity</th>
           <th>Actions</th>
           <th>Status</th>
+          <th>Payment</th>
         </tr>
       </thead>
       <tbody>
@@ -191,11 +204,11 @@
           <td><%= rs.getString("quantity") %></td>
           <td>
               <div class="ac-btn">
-            <!--<a href="trackOrder.jsp?order_id=<%= rs.getInt("order_id") %>" class="action-btn track-btn">Track</a>-->
             <a href="cancelOrder.jsp?order_id=<%= rs.getInt("order_id") %>" class="action-btn cancel-btn">Cancel</a>
             </div>
               </td>
           <td><%= rs.getString("status") %></td>
+          <td><%= rs.getString("payment_mode") %></td>
         </tr>
     <%
       }

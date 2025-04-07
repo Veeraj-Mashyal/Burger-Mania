@@ -4,20 +4,112 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - Our Food Business</title>
     
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Matemasie&display=swap" rel="stylesheet">
+    
     <style>
         /* Global Styles */
-        body {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        nav {
+            background: black;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 10px 10px 20px;
+        }
+        .logo {
+            font-size: 15px;
+            font-weight: 400;
+            font-family: "Matemasie", serif;
+            padding: 10px;
+        }
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        .nav-links li {
+            position: relative;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            padding: 10px;
+            display: block;
+        }
+        .nav-links a:hover {
+            background-color: rgb(66, 66, 66);
+            border-radius: 10px;
+        }
+ 
+        .dropdown {
+            display: none;
+        }
+        .icons {
+            display: flex;
+            gap: 5px;
+            font-size: 20px;
+            padding: 2px;
+        }
+        .icons a{
+            padding: 10px;
+            color: white;
+        }
+        .icons a:hover{
+            background-color: rgb(66, 66, 66);
+            border-radius: 10px; 
+        }
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .highlight{
+            background-color: rgb(66, 66, 66);
+            border-radius: 10px;
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                background: black;
+            }
+            .nav-links.show {
+                display: flex;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .nav-links li {
+                display: block;
+                text-align: center;
+            }
+        }
+/*        body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f8f9fa;
-            /*color: #333;*/
-        }
+            color: #333;
+        }*/
         header {
             text-align: center;
             padding: 2px;
             background-color: #2c3e50;
             color: white;
+            margin-top: 1%;
         }
         h1{
             margin: 10px 0;
@@ -55,23 +147,7 @@
         .reverse {
             flex-direction: row-reverse;
         }
-/*        .team {
-            text-align: center;
-        }
-        .team-img{
-           display:flex;
-           align-items: center;
-           justify-content: center;
-           gap: 5%;
-        }
-        
-        .team-img img {
-            width: 200px;
-            height: 200px;
-            border-radius: 20%;
-            margin: 10px;
-            border: 3px solid #ff6b6b;
-        }*/
+
         .allbody{
             font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         }
@@ -134,10 +210,32 @@
     </style>
 </head>
 <body>
+    
+        <nav>
+        <div class="logo">Burger</div>
+        <ul class="nav-links">
+            <li><a href="franchise.jsp">Get Franchise</a></li>
+            <li><a href="products.jsp">Menu</a></li>
+            <li><a href="contactjsp.jsp">Contact us</a></li>
+            <li><a href="login.jsp">Login/Signup</a></li>
+            <li class="highlight"><a href="aboutus.html">About us</a></li>
+            <li><a href="feedback.jsp">Feedback</a></li>
+        </ul>
+        <div class="icons">
+            <a href="cart.jsp"><i class="fas fa-shopping-cart"></i></a>
+            <a href="user-profile.jsp"><i class="fas fa-user"></i></a>
+            <span class="menu-toggle">☰</span>
+        </div>
+    </nav>
+    <script>
+        document.querySelector(".menu-toggle").addEventListener("click", function() {
+            document.querySelector(".nav-links").classList.toggle("show");
+        });
+    </script>
     <div class="allbody">
     <header>
         <h1>About Us</h1>
-        <p>Discover our story, meet our team, and explore our philosophy.</p>
+        <!--<p>Discover our story, meet our team, and explore our philosophy.</p>-->
     </header>
 
     <div class="container">

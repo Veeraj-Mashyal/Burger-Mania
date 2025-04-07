@@ -52,6 +52,9 @@
             text-decoration:none;
             border-radius: 5px;
         }
+        a:hover{
+            background: rgb(34, 34, 34);
+        }
         
         @keyframes circle-animation {
             to {
@@ -146,7 +149,8 @@
 <p class="message">Your order has been confirmed!</p>
 <p><strong>Payment Mode:</strong> <%= paymentMethod %></p>
 <p><strong>Total Amount:</strong> ₹<%= finalAmount %></p>
-<a href="index.html">Back to Home Page</a>
+<a href="user-profile.jsp">Back to User Profile</a>
+<a href="viewbill.jsp">View Bill</a>
 
 </body>
 </html>
