@@ -11,11 +11,10 @@ The **Online Food Ordering System** is a web-based application built using **JSP
 ### Customer Features:
 
 - Browse menu & add items to cart
-- Wishlist & favorites
-- Secure payment processing
 - Track orders in real-time
+- Cancel an Order
+- Contact Customer Care
 - Reviews & ratings
-- Apply offers, coupons & loyalty rewards
 
 ### Admin Features:
 
